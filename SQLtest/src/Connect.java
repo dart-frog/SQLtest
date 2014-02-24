@@ -17,7 +17,7 @@ public class Connect {
 	
 	private java.sql.Connection getConnection(){
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerConnecion");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerConnection");
 				con = java.sql.DriverManager.getConnection(getConnectionUrl(), userName, password);
 				if(con != null) System.out.println("Connection Successful");
 			}catch(Exception e){
@@ -37,6 +37,9 @@ public class Connect {
 					System.out.println("Driver Information");
 					System.out.println("\tDriver Name: " + dm.getDriverName());
 					System.out.println("\tDriver Version: " + dm.getDriverVersion());
+					System.out.println("\nDatabase Information: ");
+					System.out.println("\tDatabase Name: " + dm.getDatabaseProductName());
+					System.out.println("\tDatabase Version: " + dm.getDatabaseProductVersion());
 					System.out.println("Avalilable Catalogs ");
 					rs = dm.getCatalogs();
 					while(rs.next()){
