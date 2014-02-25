@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 
 public class Connect {
 	private java.sql.Connection con = null;
@@ -66,6 +70,23 @@ public class Connect {
 	public static void main(String[] args) throws Exception{
 		Connect myDbTest = new Connect();
 		myDbTest.displayDbProperties();
+		myDbTest.retrieve();
+	}
+	public void retrieve(){
+		Connection con = getConnection();
+		try{
+			String sql = "SELECT make,model,year FROM nate.Vehicle";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()){
+				System.out.println(rs.getString("make") + ", " + rs.getString("model") + ", " + rs.getInt("year"));
+			}
+			rs.close();
+			stmt.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 
